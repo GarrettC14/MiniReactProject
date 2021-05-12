@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import NewUser from "./Components/NewUser/NewUser";
+import UserList from "./Components/NewUser/UserList";
+import { useState, Fragment } from "react";
 
 function App() {
+  const [userData, setUserData] = useState([]);
+
+  //I know that two props will be passed up, name and
+
+  const addUserHandler = (userName, userAge) => {
+    setUserData((prevState) => {
+      return [...prevState, { name: userName, age: userAge }];
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <NewUser getUserData={addUserHandler} />
+      <UserList users={userData} />
+    </Fragment>
   );
 }
 
